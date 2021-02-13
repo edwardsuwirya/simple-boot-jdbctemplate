@@ -17,7 +17,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
 
     @Override
     public void add(Customer customer) {
-
+        jdbcTemplate.update("INSERT INTO m_customer values (?,?,?,?,?)", customer.getId(), customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getAddress());
     }
 
     @Override

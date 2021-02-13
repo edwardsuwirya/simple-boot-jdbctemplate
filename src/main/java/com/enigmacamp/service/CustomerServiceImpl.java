@@ -4,6 +4,7 @@ import com.enigmacamp.entity.Customer;
 import com.enigmacamp.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,5 +31,13 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Integer getTotalCustomer() {
         return customerRepository.count();
+    }
+
+    @Transactional
+    @Override
+    public void createBulkCustomer(List<Customer> customers) {
+        for (Customer c : customers) {
+            customerRepository.add(c);
+        }
     }
 }

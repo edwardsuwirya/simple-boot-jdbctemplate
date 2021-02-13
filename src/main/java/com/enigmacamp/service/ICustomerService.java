@@ -12,4 +12,6 @@ public interface ICustomerService {
     List<Customer> getAllCustomer();
 
     Integer getTotalCustomer();
+
+    void createBulkCustomer(List<Customer> customers);
 }

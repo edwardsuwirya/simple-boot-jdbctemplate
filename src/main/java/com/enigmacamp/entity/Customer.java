@@ -1,6 +1,8 @@
 package com.enigmacamp.entity;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private String id;
     private String firstName;
     private String lastName;
