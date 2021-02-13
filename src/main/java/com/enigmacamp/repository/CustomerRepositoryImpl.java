@@ -2,6 +2,7 @@ package com.enigmacamp.repository;
 
 import com.enigmacamp.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -39,18 +40,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
 
     @Override
     public List<Customer> findAll() {
-        List<Customer> customerList = jdbcTemplate.query("SELECT * FROM m_customer", new RowMapper<Customer>() {
-            @Override
-            public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
-                Customer customer = new Customer();
-                customer.setId(resultSet.getString(1));
-                customer.setFirstName(resultSet.getString(2));
-                customer.setLastName(resultSet.getString(3));
-                customer.setAddress(resultSet.getString(4));
-                customer.setCity(resultSet.getString(5));
-                return customer;
-            }
-        });
+        List<Customer> customerList = jdbcTemplate.query("SELECT * FROM m_customer", new BeanPropertyRowMapper().newInstance(Customer.class));
         return customerList;
     }
 
